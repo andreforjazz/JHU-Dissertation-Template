@@ -223,11 +223,15 @@
 \usepackage{parskip}                        % default spacing around environments
 \usepackage{tikz}                           % drawing related package
 \usepackage{subcaption}                     % individual panel and caption
+% If you are trying to include the PDF file, use the following (requires the `pdfpages` package):
+\usepackage{pdfpages}
+
+% \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
+%     date=year, isbn=false, url=false, doi=true, refsection=chapter]{biblatex}
+\usepackage[backend=biber, style=nature]{biblatex}
 
 %% add more packages and/or change options of the packages as needed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END LaTeX PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% specifying direct package options related to document formatting
@@ -613,7 +617,8 @@
 \include{09-chapter-4}
 \include{10-chapter-5}
 
-%% add more main text technical chapters if you have
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% END MAIN MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -626,8 +631,10 @@
 \fancyhead[L]{\nouppercase \leftmark}
 \printbibliography[title={Bibliographic references},
     heading=bibintoc, notcategory=mypapers]
-\clearpage                              % flushes out floating header
+\clearpage     
 
+%%%%%%%%%%%%%%%%%%%%%%%%%    CV     %%%%%%%%%%%%%%%%%%%%
+\includepdf[pages=-]{CV_9_27_2025.pdf} % Include all pages from the PDF%% add more main text technical chapters if you have
 
 %%%% Appendix chapter (same header format as the main chapters)
 %% if you do not have appendix chapters, then comment them out
