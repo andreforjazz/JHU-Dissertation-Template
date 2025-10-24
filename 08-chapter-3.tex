@@ -1,7 +1,6 @@
 \chapter{3D imaging of ovarian cancer precursors in entire human Fallopian tubes} \label{chap:chap-3}
 \begin{refsection}
      % Specify Chapter 2's `.bib` file here
-    \addbibresource{references/chapter2/ref-extracts.bib}
     
     \section{Introduction}
     Ovarian cancer is the most lethal gynecological malignancy, with high grade serous carcinoma (HGSC) accounting for the majority of the cases \cite{Bowtell2015Rethinking,Kurman2016Dualistic}1–6. Accumulating evidence supports the fallopian tube, and serous tubal intraepithelial carcinoma (STIC), as the primary precursor of ovarian cancer6–15. This multi-organ progression from the fallopian tube to the ovary is unique among cancers, and its discovery has spurred research into the progression of STICs to invasive HGSC16–22. Yet, our current knowledge of ovarian cancer precursors largely stems from studies involving clinical specimens from individuals with ovarian cancer, gynecologic abnormalities, or from high-risk individuals possessing genetic risk factors23–26. Consequently, our knowledge of ovarian cancer precursors in wholly non-diseased specimens is limited27–30.
@@ -16,13 +15,51 @@
     \subsection{Construction of cohorts of 3D-microanatomically labelled human fallopian tubes for assessment of ovarian cancer precursors }
     To assess the presence of ovarian cancer precancerous lesions, including p53 signatures and STICs, in gynecologically healthy women, we developed a pipeline to collect intact donor fallopian tube samples. Samples were procured through the network for pancreatic organ donors (nPOD) from individuals with no documented gynecological disease and no genetic risk factors for ovarian cancer (Fig. 1A). Organs were accepted if donors suffered no abdominal trauma and if warm ischemic time (WIT) was <16 h.
     Fallopian tubes were processed into formalin fixed, paraffin embedded (FFPE) blocks and exhaustively serially sectioned at a thickness of 4 microns. One in every two sections was stained with H\&E, one in every eight sections was IHC stained using p53, and one in every eight sections was IHC using Ki67 (Fig. 1B). Stained slides were imaged at 20x resolution (0.5 micron/pixel) using a Hamamatsu S210 scanner, stored as NDPI files, and post-processed into tiff image files. The mean number of sections cut for each human fallopian tube was 981, median 999, maximum 1373, and minimum 601. The average dimensions of the convoluted fallopian tubes in the FFPE blocks were 2.43 cm x 2.26 cm x 0.5 cm, median 2.34 cm x 2.10 cm x 0.5 cm. The average total volume per fallopian tube was 0.68 cm3, median 0.75 cm3. For context, the median volume of fallopian tube sampled by a single of whole slide is 0.00075 cm3 (=0.75cm3/999). The mean and median number of cells per fallopian tube was 438.3 million and 509 million, respectively. To preserve DNA, RNA, and proteins, unstained sections were mounted on plus slides and stored with desiccant packets at -20°C. 
-    We trained three deep learning models to semantically segment the fallopian tube microanatomy. The first model segmented eight structures from the H&E-stained images: tubal epithelium, mesothelium, blood vessels, stroma, fat, nerve, rete ovarii, and background. The second model sub-classified the fallopian tubal epithelium into secretory and ciliated epithelial cells. The third model masked locations of positive p53 and Ki67 signals on the IHC images. Alignment of the H\&E and IHC segmented images into a volume via nonlinear image registration54,60 enabled automatic identification of secretory epithelial cells featuring p53+/Ki67+ and p53+/Ki67- signal. p53 staining positivity was defined herein as the staining pattern consistent with a TP53 missense mutation using the criteria previously reported61. Ki67 positivity was defined as the Ki67 labeling index was significantly higher than that of the adjacent or background epithelium. At these regions, we exported stacks of high-resolution registered 2D images, allowing human validation of detected lesions. A total of 1,285 deep learning-highlighted p53+/Ki67+ and p53+/Ki67- epithelium locations, with a mean of 257 and a median of 211 per fallopian tube, were automatically detected by our algorithm and then manually validated by pathologist experts. Highlighted locations were categorized as proliferative active STICs, proliferative dormant STICs, p53 signatures, or non-lesions (Fig. 1C). 
-    Following detection of epithelial lesions, intervening unstained slides were used for deeper profiling. To understand the immune microenvironment of the proliferative active STIC, we applied a CODEX panel of 25 antibodies for WSI proteomics analysis (Fig. 1E). To understand the metabolic changes, we used spatial single-cell metabolomics (Fig. 1E). Lastly, to study gene expression variations and infer copy number alterations, we applied 10x Genomics Visium Cytassist (Fig. 1F).
+    We trained three deep learning models to semantically segment the fallopian tube microanatomy. The first model segmented eight structures from the H\&E-stained images: tubal epithelium, mesothelium, blood vessels, stroma, fat, nerve, rete ovarii, and background. The second model sub-classified the fallopian tubal epithelium into secretory and ciliated epithelial cells. The third model masked locations of positive p53 and Ki67 signals on the IHC images. Alignment of the H\&E and IHC segmented images into a volume via nonlinear image registration54,60 enabled automatic identification of secretory epithelial cells featuring p53+/Ki67+ and p53+/Ki67- signal. p53 staining positivity was defined herein as the staining pattern consistent with a TP53 missense mutation using the criteria previously reported61. Ki67 positivity was defined as the Ki67 labeling index was significantly higher than that of the adjacent or background epithelium. At these regions, we exported stacks of high-resolution registered 2D images, allowing human validation of detected lesions. A total of 1,285 deep learning-highlighted p53+/Ki67+ and p53+/Ki67- epithelium locations, with a mean of 257 and a median of 211 per fallopian tube, were automatically detected by our algorithm and then manually validated by pathologist experts. Highlighted locations were categorized as proliferative active STICs, proliferative dormant STICs, p53 signatures, or non-lesions (Fig. 1C). 
+    Following detection of epithelial lesions, intervening unstained slides were used for deeper profiling. To understand the immune microenvironment of the proliferative active STIC, we applied a CODEX panel of 25 antibodies for WSI proteomics analysis (Fig. 1E). To understand the metabolic changes, we used spatial single-cell metabolomics (Fig. 1E). Lastly, to study gene expression variations and infer copy number alterations, we applied 10x Genomics Visium Cytassist (Fig. \ref{chapter3_fig1}).
+    
+    \begin{figure}[h!]
+        \begin{center}
+            \includegraphics[width=\textwidth,clip,page=1] {figures/chapter3/Fig1.jpg}
+            \caption{A novel workflow for whole-organ screening of organ donor fallopian tubes for detection and molecular characterization of rare and microscopic lesions. (a) Fallopian tubes were obtained from low-risk, non-diseased donors via the nPOD network. (b) Specimens were surgically resected, histologically sectioned, stained with H\&E and digitized at high resolution. A subset of the sections was stained with p53 and proliferation marker Ki67 using IHC. (c) H\&E- and IHC-stained sections were reconstructed into digital 3D volumes using nonlinear registration. A semantic segmentation algorithm was trained to label tissue components in the H\&E images, and starDist was used to segment nuclear boundaries. A supervised algorithm was used to locate 3D regions containing HGSC precursors 3D. (d-f) Pathologist-validated lesions were further molecularly profiled using (d) spatial transcriptomics, (e) stimulated Raman scattering hyperspectral imaging (SRS-HSI) based spatial metabolomics, and (f) spatial proteomics.}
+            \label{chapter3_fig1}
+        \end{center}
+    \end{figure}
     
     \subsection{3D characterization of the microanatomy of the human fallopian tube and STIC lesions}
     To comprehensively study the microanatomy of the fallopian tube in organ donor samples, we analyzed the results of the registered, segmented H\&E images (Fig. 2A). High-grade serous tumors primarily originate from secretory epithelial cells in the human fallopian tube62, highlighting the importance of understanding the composition and spatial arrangement of secretory epithelial cells in pre- and post-menopausal non-diseased fallopian tubes. Here, we analyzed 175.1 million pre-menopausal epithelial cells and 112.3 million post-menopausal epithelial cells. We produced z-projection heatmaps and 3D reconstructions, conveying the marked convolutions of the fallopian tube epithelial and the intermixing of secretory and ciliated epithelial cells (Fig. 2B and 2C). We found on average higher composition of secretory epithelial cells in post-menopausal (76\% secretory, 24\% ciliated) women compared to pre-menopausal women (58\% secretory, 42\% ciliated (Fig 2D). 
     Our 3D maps of whole fallopian tubes allowed us to computationally generate “virtual” sections of selected orientation (e.g. orthogonal to the main axis of the fallopian tube). To generate virtual sections along the length of the fallopian tube, we skeletonized each specimen by calculating the center path along the convoluted tubal lumen. At each cross section along the tube, we calculated the distance to the ovary (defined at the tip of the fimbriated end), and categorized this distance as proximal, medial, or distal. We visualized (Fig 2C, bottom; Supplementary Video 1) and quantified (Fig 2E, right) the distribution of secretory cells to show that the drop in ciliated cell content from pre- to post-menopausal primarily affects the locations on the fallopian tube medial and distal to the ovary, with similar composition of ciliated cells proximal to the ovary across age groups (Fig. 2E, right). We further quantified the secretory and ciliated cell composition as a function of distance along the center path, for precise sampling by generating thousands of orthogonal virtual cross sections along the epithelium (up to 10,255 virtual sections per sample). For each cross section, we quantified the overall frequency of secretory and ciliated epithelial cells from the distal isthmus to the proximal fimbriated end. 
     As the majority of STICs originate from secretory epithelial cells63, understanding their spatial distribution and age-associated changes is critical for understanding early ovarian tumorigenesis. Using our workflow to quantify the normal epithelial composition 3D, the data revealed that, in post-menopausal tubes, the proportion of secretory cells increases sharply toward the fimbriated end. In contrast, pre-menopausal tubes demonstrate a distal decrease in secretory cell percentage with a concomitant increase in total epithelial cell number due to expansion of ciliated cells. These data indicate that menopausal status substantially remodels the cellular composition of the distal tube towards a more secretory epithelial cell landscape, potentially influencing the local risk for neoplastic precursor lesions.
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.95\textheight,keepaspectratio,clip,page=1]{figures/chapter3/Fig2.jpg}
+            \captionsetup{font=small}
+            \caption{\textbf{3D analysis of tissue and cellular components of the human Fallopian tube.} (a) The CODA semantic segmentation platform was used to label microanatomical components of the human Fallopian tubes from H\&E-stained images, including secretory epithelium, ciliated epithelium, mesothelium, blood vessels, stroma, fat, and nerve.}
+            \label{chapter3_fig2}
+        \end{center}
+    \end{figure}
+    
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(b) 2D heatmaps obtained form best projections of the whole stacks of labeled images showing the differences in the human Fallopian tube’s epithelium, whereby post-menopausal samples showed less ciliated epithelium than pre-menopausal samples. (c) Major tissue components of the Fallopian tube reconstructed using the 3D CODA mapping platform, which revealed high vascularization of human Fallopian tubes (top panels). 3D rendering of epithelial subtypes confirmed the presence of higher secretory epithelial populations in post-menopausal samples when compared to pre-menopausal samples (bottom panel). (d) Bulk tissue composition plots of ciliated and secretory epithelium in post- and pre-menopausal human Fallopian tubes (top panel), and plotted compared to proximal, medial, and distal locations to ovaries (bottom panel). (e) Center path of each human Fallopian tube was computed to measure variance in epithelium across each specimen. (f) Cross sectional analysis of the Fallopian tubes revealed an increase in secretory epithelial cells along the entirety of the post-menopausal Fallopian tubes, when compared to pre-menopausal cohort.}
+    \end{figure}
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.95\textheight,keepaspectratio,clip,page=1]{figures/chapter3/FigS1.jpg}
+            \captionsetup{font=small}
+            \caption{ \textbf{3D-CODA single cell resolution framework to map epithelial cell subtypes.} (a) Representation of H\&E-stained human Fallopian tube whole-slide image (left panel). CODA segmented tissues, such as epithelium, mesothelium, blood vessels, fat, nerves (middle panel, top). CODA subtyped the epithelium into secretory epithelium and ciliated epithelium (middle panel, bottom). Combination of the two segmentation models allowed for detailed tissue mapping of whole fallopian tube H\&E-stained images (right panel).}
+            \label{chapter3_figS1}
+        \end{center}
+    \end{figure}
+    
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(b) Testing of the segmentation models was performed on independent images from the training dataset. Tissue model showed overall accuracy of 95.2\% (top panel) and epithelial subtyping model showed an overall accuracy of 93.2\% (bottom panel).(c) Nuclear segmentation model was applied to all H\&E-stained images of each human Fallopian tube to obtain cellular resolved data. (d) Bulk cell density was measured for each tissue type of each human Fallopian tube. Ciliated and secretory cell density was lower for ID 1 and 2, which contained the most lesions. (e) Cross sectional analysis of the Fallopian tubes revealed increased in secretory epithelial cells along the entirety of the post-menopausal Fallopian tubes, when compared to pre-menopausal cohort.}
+    \end{figure}
     
     \subsection{3D mapping of lesions in the non-diseased human fallopian tube epithelium}
     To implement a strategy for detailed 3D mapping of epithelial lesions in average-risk, nondiseased human fallopian tubes, samples were alternately stained with H\&E, p53 IHC and Ki67 IHC (Fig. 3A). Implementation of segmentation of the H\&E and IHC images allowed automated detection of p53 signatures, proliferative dormant STICs, and active STICs following standard clinical definitions (Fig. 3B). 3D volumetric renderings of these lesions convey their microscopic size and wide range  of 3D morphology (Fig. 3C; Supplementary Video 2). 
@@ -35,6 +72,36 @@
     \subsection{Development of virtual SEE-FIM for statistical determination of fallopian tube sampling guidelines}
     We asked why previous SEE-FIM-based assessments have not detected this high occurrence of lesions. To quantify the impact of subsampling when detecting ovarian cancer precursors, we virtually implemented a virtual SEE-FIM protocol. We generated longitudinal sections at the fimbriated end and transverse sections along the remainder of the ampulla and isthmus, as done in the clinic. To show the ability of SEE-FIM to identify lesions, including proliferative active STICs,  dormant STICS, and p53 signatures were highlighted in red, orange and yellow, respectively (Fig. 3G, and Fig. S2D; Supplementary Video 3).
     First, we simulated current SEE-FIM guidelines via collection of 20 equally spaced virtual sections, representing approximately 0.25\% volume of the entire organ. Within the extracted sections, SEE-FIM was able to identify 10.8\% of all lesions, 14.6\% of STICs, 10.1\% of proliferative dormant STICs, and 11.9\% of p53 signatures. These results reveal that conventional SEE-FIM protocol may significantly underestimate the true incidence of precursor lesions in human fallopian tubes. We determined that approximately 2.3\%, or 186 tissue sections, of the whole fallopian tube would need to be assessed to accurately identify all lesions with <25\% error (Fig. 3H, left panel, Fig. S2E, top left panel). Splitting by lesion type, we determined that to accurately identify STICs, proliferative dormant STICs, and p53 signatures with 25\% error, 1.8\% (149 sections), 2.4\% (190 sections), and 2.2\% (174 sections) of the fallopian tube would need to be assessed, respectively (Fig. 3H, Fig. S2E). 
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.90\textheight,keepaspectratio,clip,page=1]{figures/chapter3/Fig3.jpg}
+            \captionsetup{font=small}
+            \caption{ \textbf{3D mapping of ovarian cancer precursors reveals high lesion burden with spatially patterned, scale-free growth.} (a) Integrated pipeline combining Immunohistochemistry staining (Ki67 and p53) and 3D computational reconstruction to map lesions across entire fallopian tubes (n=5). }
+            \label{chapter3_fig3}
+        \end{center}
+    \end{figure}
+    
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(b) Z-projection demonstrating detection of proliferative Ki67+ and p53+ aberrant foci. (c) Pathologist-expert validated lesions were labelled as proliferative active STIC, proliferative dormant STICs, and p53-signatures, and 3D rendered. (d) Volumetric rendering of a proliferative active STIC within fimbriae architecture (scale: mm). (e) Spatial distribution of lesions, showing high lesion burden and sparse distribution of lesions in the human fallopian tubes. (f) Complementary cumulative distribution functions (CCDFs) of lesion size follow a power-law trend across all tube regions. (g) Example of 3D virtual SEE-FIM computed for a post-menopausal sample containing 5,893 virtual sections. (h) 3D virtual SEE-FIM procedure was computed for incrementally increasing number of virtual sections. Percentage of detected combined lesions, proliferative active STICs, proliferative dormant STICs, and p53 signatures was calculated for each equally distant virtual section count. The number of sections used in standard SEE-FIM procedures is indicated by the black or orange vertical lines.}
+    \end{figure}
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.95\textheight,keepaspectratio,clip,page=1]{figures/chapter3/FigS2.jpg}
+            \captionsetup{font=small}
+            \caption{ \textbf{3D spatial and bulk mapping of ovarian cancer precursors.} (a) CODA segmentation model to annotate IHC positive signal in whole slide images was tested on an independent testing dataset and achieved an overall accuracy of 98.7\%.}
+            \label{chapter3_figS2}
+        \end{center}
+    \end{figure}
+    
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(b) Semi-automated method of lesion detection in whole human fallopian tubes showed 13 STICs, 64 proliferative dormant STICs, and five p53 signatures across 3 samples of the post-menopausal cohort. On the 2 samples of the pre-menopausal cohort, we identified zero STICs, 17 proliferative dormant STICs, and six p53 signatures. (c) STICs, proliferative dormant STICs, and p53 signatures were separated according to their spatial locations in the fallopian tube. STICs were found only in Post-menopausal samples, with 9 STICs in the Fimbriated end and four STICs in the Ampulla. The majority of proliferative dormant STICs were found in the Ampulla in both pre- and post-menopausal samples, with 16 and 39 proliferative dormant STICS, respectively. The p53 signatures were identified mostly in the Ampulla and Fimbriated end. (d) Example of 3D virtual SEE-FIM computed for a post-menopausal sample containing 10,255 virtual sections. (e) 3D virtual SEE-FIM procedure was computed for incrementally increasing number of virtual sections. Percentage of detected combined lesions, STICs, proliferative dormant STICs, and p53 signatures was calculated for each equally distant virtual section count. The number of sections used in standard SEE-FIM procedures is indicated by the black or orange vertical lines. (f) Example of p53 signature, proliferative dormant and active STICs found amongst the cohort.}
+    \end{figure}
     
     \subsection{Spatial protein marker profiling of STIC in non-diseased human fallopian tubes}
     To study the microenvironment surrounding the proliferative active STIC identified in 3D, we applied a panel of 25 protein markers using CODEX multiplexed imaging. We applied nucleus and cell body segmentation to identify 972,276 cells across the whole slide image (Fig.4A-B)66. We performed unsupervised clustering to obtain 30 distinct clusters, which we annotated and combined the clusters into 19 relevant cell phenotypes using previously established methods (Fig. 4C)67–69. These cellular phenotypes included STIC, epithelial cells, immune cell phenotypes (T cells, B cells, macrophages, neutrophils, dendritic cells), stromal cells (fibroblasts, smooth muscle cells), and tumor associated macrophages (TAMs), shown spatially in Fig. 4D. The protein expression matrix (Fig. 4E) and protein markers interactions70 (Fig. 4F) illustrate that epithelial and proliferating epithelial cells interact with EpCAM, Pan-CK, and Ki67. We labelled activated and memory T cells by CD3, CD4, CD8, and CD45RO, with additional links to IFNG and CD44. We identified B cells via CD20, and dendritic or APC populations by HLA-DR, CD11c, and CD141. Macrophages (TAMs) and monocytes associate with CD68 and IDO1, neutrophils with MPO, and endothelial cells with CD31. Mesenchymal and myofibroblast identities are confirmed by Vimentin and SMA. These specific interactions validate the correct phenotypic annotation in the dataset.
@@ -42,17 +109,224 @@
     PAGA analysis identified an immune network connecting TAMs, regulatory DCs, and activated T cells to CD8+ memory cytotoxic T cells. Additionally, CD8+ T cell connection to epithelial cells further bridging to STIC populations. This CD8+ T cell population's dual connectivity to both immunosuppressive cells and epithelial cells may indicate potential compromised immune surveillance72–74. While these topological relationships require functional validation, their organization suggests structurally relevant cellular interactions potentially governing STIC maintenance75. This immunological landscape closely mirrors established observations in ovarian cancer literature, where TAM enrichment and regulatory immune cell infiltration consistently correlate with tumor progression and poor clinical outcomes76–79. 
     To further validate the results obtained from the PAGA graphs, spatially resolved protein profiling was implemented to assess immunosuppressive expression within these interacting cell populations. Thus, to spatially assess the STIC microenvironment, STIC mask was generated and consequently dilated in 10-micron increments up to 500 microns from the STIC boundaries (Fig. S3B). For each distance interval computed, cellular composition was estimated and visualized (Fig. 4H). To quantify the differences in cellular composition relative to proximity to STIC location, comparison between regions close to the STIC (less than 100 microns) and regions distant to the STIC (between 100 and 500 microns) was performed. Proximity to the STIC showed modest enrichment in macrophages or monocytes, B cells, antigen-presenting cells (APCs), suppressed dendritic cells, and CD8 memory T cells (Fig. 4I).
     Spatial CODEX analysis identified an immunoregulatory microenvironment surrounding STIC lesions, with an increase of macrophages, regulatory dendritic cells, and CD8 memory T populations in proximal regions (Fig 4I). This validated the PAGA analysis, which showed direct connectivity between these immune populations and epithelial cell states. The spatial organization of these macrophage and CD8 T-cell populations aligns with the immune modulation observed in early high grade serous ovarian cancer76. These findings define the STIC microenvironment as a site of coordinated immune epithelial interactions that may facilitate early lesion persistence. Our results were consistent with those previously published80.
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.9\textheight,keepaspectratio,clip,page=1]{figures/chapter3/Fig4.jpg}
+            \captionsetup{font=small}
+            \caption{ \textbf{Proliferative active STIC lesion creates an immunosuppressive niche through altered cellular crosstalk and spatial reorganization of the tumor microenvironment.} (a) Multiplexed CODEX imaging reveals protein expression patterns across 25 markers in proliferative active STIC. (b) Single-cell resolution mapping of Fallopian tube epithelium (972,276 nuclei).}
+            \label{chapter3_fig4}
+        \end{center}
+    \end{figure}
+    
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(c) UMAP clustering identifies distinct cellular phenotypes, with proliferative (Ki67+) epithelial-immune clusters enriched in STIC. (d) Cell-type-specific protein signatures highlight metabolic and immune checkpoint dysregulation in STIC and adjacent stroma. (e) PAGA network analysis uncovers rewired interactions between stromal fibroblasts and immunosuppressive myeloid populations in STIC. (f) Spatial profiling demonstrates immune exclusion, with cytotoxic T cells displaced and suppressive dendritic cells recruited near STIC. (g) Quantification of immune-stromal shifts across increasing distances from STIC core. (h-i) Comparative cellular landscapes reveal modest immune localization near the STIC.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.9\textheight,keepaspectratio,clip,page=1]{figures/chapter3/FigS3.jpg}
+            \captionsetup{font=small}
+            \caption{ Topological and spatial proteomic mapping of proliferative active STIC microenvironment. (a) PAGA unpruned network analysis shows cellular interactions, highlighting immunosuppressive populations near proliferative active STIC. (b) Active STIC region was masked and subsequently dilated to generate 10 micron distances. At each distance, the cellular composition was assessed. Black lines in the figure indicate incremental 100 micron distance from the STIC in red.}
+            \label{chapter3_figS3}
+        \end{center}
+    \end{figure}
+    
     
     \subsection{Spatial metabolomics profiling of STIC in non-diseased human fallopian tubes}
     Existing single cell and spatial transcriptomics data analysis has shown association of fallopian tube epithelium to genes and pathways associated with metabolic regulations in various contexts 81–83. With this in mind, we carefully evaluated unsaturated lipid level and redox ratio of preneoplastic epithelial lesions by multimodal two-photon stimulated Raman scattering imaging (SRS) (Figures 1A-C, S1A and S2A-C). We found that the unsaturated lipid level was reduced while the redox ratio indicated by NADH/FAD was increased in the lesion cells compared to the healthy surrounding cells (Figure 1C), suggesting the lesion epithelia subjects to ROS stress and metabolic remodeling towards glycolysis 84. Worth noting that the scattered distribution of NADH and FAD signals in lesions (Figure 1C in cyan and magenta) may indicate the fragmented mitochondria with compromised metabolic function.  We further applied hyperspectral SRS imaging and lipid subtype detection58 to perform an in situ lipidomic analysis and identified that lesions represented a distinct lipid profile manifesting in upregulated ceramide/PE and PC/PE ratio (Figures 1D-F and S1B), aligning with a study showing the disturbed homeostasis of ceramides and phospholipids in abnormal epithelial context 85. 
     Interestingly, Raman spectra showed distinct changes of lipid profile in different types of lesions (Figures S2D-F), suggesting the lipid metabolism is highly sensitive to the lesions and different lipid profile may represent the trajectory of lesion development. Altogether, our results provide new insights into the molecular mechanisms underlying the lesions of fallopian tube epithelium.
+
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.9\textheight,keepaspectratio,clip,page=1]{figures/chapter3/Fig5.jpg}
+            \captionsetup{font=small}
+            \caption{ \textbf{Multimodal SRS imaging reveals the metabolic remodeling in lesions.} (a) P53 staining shows the lesion regions. (b) SRS protein channel overlayed with second homogenization (SHG) signal for collagen to show the architecture of the same lesion region of interest (ROI) in (a). Scale bar: 200 µm.}
+            \label{chapter3_fig5}
+        \end{center}
+    \end{figure}
     
-    Spatial transcriptomic profiling of STIC in nondiseased human fallopian tubes
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(c) Multimodal SRS imaging shows the comparation of multiple metabolites between control and lesion ROI. Scale bar: 20 µm. (d) Hyperspectral SRS imaging and unsupervised clustering showing the distribution of metabolites across the whole ROI shown in (A) and (B). (e) Hyperspectral SRS imaging and unsupervised clustering shows the difference of metabolic profiles between control and lesion ROI. Red arrows points to the typic Raman lipid peaks at 2850 cm-1 and 2880 cm-1. (f) The ratio images of ceramide/PE and PC/PE highlight the lipid subtype modulation between control and lesion ROI.}
+    \end{figure}
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.9\textheight,keepaspectratio,clip,page=1]{figures/chapter3/FigS4.jpg}
+            \captionsetup{font=small}
+            \caption{ \textbf{STIC lipid subtype characterization.} (a) Multimodal SRS imaging displays the protein, lipid, unsaturated/saturated lipid, NADH, FAD and radiometric images of unsaturated/saturated lipids, NADH/FAD of the ROI shown in (Figure 1A). Scale bar: 200 µm. (b) SRS hyperspectra based lipid subtype detection showing the difference in lipid subtype levels between control and lesion ROI. }
+            \label{chapter3_figS4}
+        \end{center}
+    \end{figure}
+    
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.9\textheight,keepaspectratio,clip,page=1]{figures/chapter3/FigS5.jpg}
+            \captionsetup{font=small}
+            \caption{\textbf{Spatial metabolomic profiling on additional targeted ovarian cancer lesions.} (a-c) Multimodal and hyperspectral SRS imaging displays the metabolic states changes in multiple lesion tissues. Scale bar: 200 µm. (d-e) SRS hyperspectra from different lesion tissues underscore the consistent lipid metabolic remodeling. Red arrows points to the typic Raman lipid peaks at 2850 cm-1 and 2880 cm-1.}
+            \label{chapter3_figS5}
+        \end{center}
+    \end{figure}
+    
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(c) Multimodal SRS imaging shows the comparation of multiple metabolites between control and lesion ROI. Scale bar: 20 µm. (d) Hyperspectral SRS imaging and unsupervised clustering showing the distribution of metabolites across the whole ROI shown in (A) and (B). (e) Hyperspectral SRS imaging and unsupervised clustering shows the difference of metabolic profiles between control and lesion ROI. Red arrows points to the typic Raman lipid peaks at 2850 cm-1 and 2880 cm-1. (f) The ratio images of ceramide/PE and PC/PE highlight the lipid subtype modulation between control and lesion ROI.}
+    \end{figure}
+    
+    \subsection{Spatial transcriptomic profiling of STIC in nondiseased human fallopian tubes}
     Using the CODA IHC-based deep learning method, we profiled STIC with spatial transcriptomics (Fig. 6A). STIC location was processed using Visium Cytassist for whole transcriptome profiling. Curation of the spatial spots identified STIC epithelial spots in red and non-STIC epithelial spots in green (Fig. 6B).
     Differential gene expressions of the proliferative active STIC against normal adjacent epithelium were obtained and shown in volcano plot (Fig. 6C). The upregulated genes in STIC, including KIF1A, TUBB2B, DLGAP5, BUB1, KIF2C, CDCA8, CDC20, CCNF, CCNB1, and PBK, suggest dysregulated cell cycle progression, mitotic spindle function, and chromosomal instability, which are seen in high-grade serous ovarian cancer86–96.  Immune-related genes like ULBP3 and BTNL2 may contribute to immune evasion, while JUN and NOX4 could promote survival and oxidative stress responses97–100. The presence of HNF4A, TFAP2A, and ADAM12 further supports a link to ovarian carcinogenesis through transcriptional deregulation, cellular differentiation, and extracellular matrix remodeling101–103. These findings reinforce STIC’s role as a precursor to high-grade serous carcinoma, with key drivers of malignancy already active104. Comparative analysis revealed significant upregulation of genes such as GPX2 (implicated in oxidative stress response) and HIST1H1D (a chromatin regulator) in STICs (Fig. 6D), mirroring patterns observed in advanced ovarian tumors105,106.
-    Pathway analysis using the Hallmarks gene sets107, and the suppressed and activated pathways were computed (Fig. 6E-F). Hallmark pathway analysis revealed enrichment of several cancer-associated pathways in STICs, including spermatogenesis, G2M checkpoint, KRAS signaling, E2F targets, oxidative phosphorylation, and TNF$\alpha$ signaling via NFκB108–115. These activated pathways are consistent with clinical observations of early oncogenic signaling in STIC lesions that precede invasive high-grade serous carcinoma development116. Gene set enrichment analysis profiles confirmed significant enrichment of proliferation-associated pathways and G2M checkpoint genes (Fig. 6G), showing dysregulated cell cycle characteristics of both STICs and invasive ovarian cancers.
+    Pathway analysis using the Hallmarks gene sets107, and the suppressed and activated pathways were computed (Fig. 6E-F). Hallmark pathway analysis revealed enrichment of several cancer-associated pathways in STICs, including spermatogenesis, G2M checkpoint, KRAS signaling, E2F targets, oxidative phosphorylation, and TNF$\alpha$ signaling via NFkB108–115. These activated pathways are consistent with clinical observations of early oncogenic signaling in STIC lesions that precede invasive high-grade serous carcinoma development116. Gene set enrichment analysis profiles confirmed significant enrichment of proliferation-associated pathways and G2M checkpoint genes (Fig. 6G), showing dysregulated cell cycle characteristics of both STICs and invasive ovarian cancers.
     To investigate chromosomal instability in proliferative active STIC, copy number analysis (CNA) was inferred from the spatial transcriptomics data (Fig. 6H-I, Fig. S6F), which revealed gains in chr6p22, chr6p21, chr1p32, and chr16p13, and losses in chr17p13, chr9q33, chr9q34, chr22q11, chr22q12, and chr22q13. These results align with clinical genomic studies showing that copy number alterations and genomic instability are early events in STIC lesions14,108,117,118. Chromosomal 6 gains and chromosomal 22 depletions were spatially located on the STIC (Fig. 6K). Notably, gains in chr6p, which harbors immune-related genes, have been linked to immune evasion and tumor progression in ovarian cancer, while losses in chr17p13, encompassing TP53 and are associated with impaired DNA damage response and genomic instability118. These alterations may collectively contribute to early malignant transformation and aggressive phenotypes in STIC lesions. 
     To further explore chromosomal alterations, we also applied inferCNV (Fig. S6F) and identified chromosomal gains in chromosomes 1, 6, 8, 16, and 19. Chromosomal losses were detected in chromosomes 4, 9, 13, 15, 17, 18, and 22.  Comparison to a large cohort study of 47 patients with proliferative active STICs108, which showed chromosomal gains in chromosomes 1, 2, 3, 6, 7, 8, 10, 12, 16, 19, and 20; and chromosomal depletions in chromosomes 4, 5, 6, 7, 8, 9, 11, 13, 15, 16, 17, and 22. Similarly, genes altered in these regions include TP53 (chr17p13), MYC (chr8q24.21), CCNE1 (chr19q12), CDKN2A/CDKN2B (chr9p21), BRCA1 (chr17q21), and NF2/TIMP3 (chr22q12-13).These chromosomal targets highlight pathways associated with cell cycle regulation, DNA repair, and immune modulation. Conversely, the large patient cohort study also reported unique gains in chr2, chr3, chr7, chr10, chr12, and chr20, and unique losses in chr5, chr7, chr8, and chr11, not observed in our nondiseased, average-risk donor cohort analysis. These regions encompass genes such as PIK3CA/MECOM (chr3q26), ETV6/FOXM1 (chr12p13), and APC (chr5q22), which are involved in PI3K signaling, transcriptional regulation, and tumor suppressor pathways. 
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.85\textheight,keepaspectratio,clip,page=1]{figures/chapter3/Fig6.jpg}
+            \captionsetup{font=small}
+            \caption{\textbf{ Spatial transcriptomic profiling reveals molecular alterations in STIC lesions.} (a) Selection of STIC regions for spatial transcriptomics profiling, validated by p53 and Ki67 IHC. (b) Identification of STIC and non-STIC epithelial regions within the Visium spatial transcriptomics platform. (c) Heatmap of differentially expressed genes in STIC lesions, highlighting key upregulated and downregulated targets (adjusted p-value < 0.05).(d) Oncogene expression patterns (e.g., GPAT2, HIST1H1D) specific to STIC regions. }
+            \label{chapter3_fig6}
+        \end{center}
+    \end{figure}
+    
+    \begin{figure}[h!]
+        \ContinuedFloat
+        \captionsetup{font=small}
+        \caption[]{(e-f) Dot plots of enriched gene signatures in STIC, including KRAS signaling, oxidative phosphorylation, and epithelial-mesenchymal transition. (g) Chromosomal ploidy analysis showing copy number variations in STIC, with focal changes on chromosomes 6 and 22.}
+    \end{figure}
+
+    \begin{figure}[p]
+        \begin{center}
+            \includegraphics[width=1\textwidth,height=0.55\textheight,keepaspectratio,clip,page=1]{figures/chapter3/FigS6.jpg}
+            \captionsetup{font=small}
+            \caption{ \textbf{Spatial expression of ovarian cancer related genes, and pathway analysis.} (a)  TMNT1 and CDC20 gene expression patterns specific to STIC regions. (b) Sets of classical and basal gene expression did not show any STIC specific expression.(c) Dot plots showing significantly enriched terms from Gene Ontology Biological Process. (d) Dot plots showing significantly enriched terms from Gene Ontology Cellular Components. (e) Dot plots showing significantly enriched terms from Hallmark gene set. Dot size represents gene count, color intensity indicates adjusted p-value, and x-axis shows normalized enrichment score (NES). Terms are ordered by statistical significance. (f) Inferred CNA using inferCNV for two Visium sections of the same proliferative active STIC. Chromosomal gains are shown in red, and chromosomal depletions are shown in blue, with respect to reference adjacent healthy epithelial cells (top rows).}
+            \label{chapter3_figS6}
+        \end{center}
+    \end{figure}
+    
+    \clearpage 
+    
+    \section{Supplemental Tables}
+    
+    \begin{table}[htbp]
+        \centering
+        \footnotesize
+        \renewcommand{\arraystretch}{1.2}
+        \caption{Table: Number of sections, dimensions, total volume, and cell count for pre-menopausal and post-menopausal donor samples.}
+        \begin{tabularx}{\textwidth}{l l c c c c c c}
+            \toprule
+            \textbf{Group} & \textbf{Donor} & \textbf{Total} & \textbf{Width} & \textbf{Length} & \textbf{Depth} & \textbf{Volume} & \textbf{Total Cells} \\
+            & & \textbf{Sections} & \textbf{(mm)} & \textbf{(mm)} & \textbf{(mm)} & \textbf{(cm³)} & \textbf{(Million)} \\
+            \midrule
+            \makecell[l]{\textbf{Post-}\\\textbf{menopausal}} & Donor 1 & 601 & 23.4 & 17.6 & 3.0 & 0.31 & 178.3 \\
+            & Donor 2 & 627 & 32.8 & 24.4 & 3.1 & 0.78 & 425.9 \\
+            & Donor 3 & 999 & 28.3 & 20.8 & 5.0 & 0.86 & 552.5 \\
+            \makecell[l]{\textbf{Pre-}\\\textbf{menopausal}} & Donor 4 & 1305 & 21.5 & 19.4 & 6.5 & 0.75 & 509.0 \\
+            & Donor 5 & 1373 & 15.5 & 32.1 & 6.9 & 0.70 & 525.8 \\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+    
+    \begin{table}[htbp]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \caption{Table S2: Number of STIC lesions in pre-menopausal and post-menopausal donor samples.}
+        \begin{tabularx}{\textwidth}{l l X X X X X}
+            \toprule
+            \multicolumn{7}{c}{\textbf{Precancerous lesions (Proliferative active and dormant STICs)}} \\
+            \midrule
+            \textbf{Group} & \textbf{Donor} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Min} & \textbf{Max} \\
+            \midrule
+            Pre-menopausal & Donor 1 & 0 & 8.5 & 8.5 & 0 & 17 \\
+            & Donor 2 & 17 &  &  &  &  \\
+            Post-menopausal & Donor 3 & 35 & 27.33 & 35 & 5 & 42 \\
+            & Donor 4 & 42 &  &  &  &  \\
+            & Donor 5 & 5 &  &  &  &  \\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+    
+    \begin{table}[htbp]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \caption{Table S3: Proliferative Active STIC lesions identified in pre-menopausal and post-menopausal donor samples.}
+        \begin{tabularx}{\textwidth}{l l X X X X X}
+            \toprule
+            \multicolumn{7}{c}{\textbf{Proliferative active STICs}} \\
+            \midrule
+            \textbf{Group} & \textbf{Donor} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Min} & \textbf{Max} \\
+            \midrule
+            Pre-menopausal & Donor 1 & 0 & 0 & 0 & 0 & 0 \\
+            & Donor 2 & 0 &  &  &  &  \\
+            Post-menopausal & Donor 3 & 8 & 4.33 & 5 & 0 & 8 \\
+            & Donor 4 & 5 &  &  &  &  \\
+            & Donor 5 & 0 &  &  &  &  \\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+    
+    \begin{table}[htbp]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \caption{Table S4: Proliferative Dormant STIC lesions identified in pre-menopausal and post-menopausal donor samples.}
+        \begin{tabularx}{\textwidth}{l l X X X X X}
+            \toprule
+            \multicolumn{7}{c}{\textbf{Proliferative dormant STICs}} \\
+            \midrule
+            \textbf{Group} & \textbf{Donor} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Min} & \textbf{Max} \\
+            \midrule
+            Pre-menopausal & Donor 1 & 0 & 8.5 & 8.5 & 0 & 17 \\
+            & Donor 2 & 17 &  &  &  &  \\
+            Post-menopausal & Donor 3 & 27 & 23.00 & 27 & 5 & 37 \\
+            & Donor 4 & 37 &  &  &  &  \\
+            & Donor 5 & 5 &  &  &  &  \\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+    
+    
+    \begin{table}[htbp]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \caption{Table S5: p53 Signatures identified in pre-menopausal and post-menopausal donor samples.}
+        \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l l c c c c c}
+            \toprule
+            \multicolumn{7}{c}{\textbf{p53 Signatures}} \\
+            \midrule
+            \textbf{Group} & \textbf{Donor} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Min} & \textbf{Max} \\
+            \midrule
+            Pre-menopausal & Donor 1 & 1 & 3 & 3 & 1 & 5 \\
+            & Donor 2 & 5 &  &  &  &  \\
+            Post-menopausal & Donor 3 & 1 & 1.67 & 1 & 0 & 4 \\
+            & Donor 4 & 4 &  &  &  &  \\
+            & Donor 5 & 0 &  &  &  &  \\
+            \bottomrule
+        \end{tabular*}
+    \end{table}
+    
+    \begin{table}[htbp]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \caption{Table S6: Statistical prevalence of ovarian cancer precursor lesions in whole human fallopian tube cohorts.}
+        \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l c c c c}
+            \toprule
+            \textbf{Group} & \makecell{\textbf{\# Patients}} & \makecell{\textbf{Proliferative}\\\textbf{Active STIC}\\\textbf{Prevalence}} & \makecell{\textbf{Proliferative}\\\textbf{Dormant STIC}\\\textbf{Prevalence}} & \makecell{\textbf{p53 Signature}\\\textbf{Prevalence}} \\
+            \midrule
+            Pre-menopausal & 2 & 0\% (0/2) & 50\% (1/2) & 50\% (1/2) \\
+            Post-menopausal & 3 & 66.67\% (2/3) & 100\% (3/3) & 66.67\% (2/3) \\
+            Combined & 5 & 40\% (2/5) & 80\% (4/5) & 60\% (3/5) \\
+            \bottomrule
+        \end{tabular*}
+    \end{table}
+
+    \clearpage
     
     \printbibliography[heading=subbibliography, title={References}]
 \end{refsection}

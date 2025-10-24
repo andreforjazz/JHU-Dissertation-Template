@@ -226,13 +226,21 @@
 % If you are trying to include the PDF file, use the following (requires the `pdfpages` package):
 \usepackage{pdfpages}
 
-% \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
-%     date=year, isbn=false, url=false, doi=true, refsection=chapter]{biblatex}
-\usepackage[backend=biber, style=nature]{biblatex}
-
+\usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
+     date=year, isbn=false, url=false, doi=true, refsection=chapter]{biblatex}
+% \usepackage{booktabs}
+% \usepackage{tabularx}
+% \usepackage{array}
+% \usepackage{booktabs}
+% \usepackage{geometry} % Make page layout better
+% \usepackage{array} % For centering columns
+% \usepackage{graphicx}
+% \usepackage{longtable}
+% \usepackage{adjustbox}
+% \usepackage{multirow}
+% \usepackage[table,xcdraw]{xcolor}
 %% add more packages and/or change options of the packages as needed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END LaTeX PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% specifying direct package options related to document formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -262,7 +270,11 @@
 
 
 %%%% BIBLATEX: bibliography package settings
-\addbibresource{\BibFileName}           % name of the bib file 
+% \addbibresource{\BibFileName}           % name of the bib file 
+% Load ALL bib files in preamble
+\addbibresource{references/chapter2/refextracts.bib}
+\addbibresource{references/chapter3/refextracts.bib}
+
 % \DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
 \AtBeginBibliography{\urlstyle{rm}}     % roman font family for URL (DOI)
 \AtBeginBibliography{\vspace*{8pt}}     % add space for single-spaced bib text
@@ -609,13 +621,14 @@
 \pagenumbering{arabic}                  % Arabic page numbering
 \fancyhead[L]{\chaptername\ \thechapter. \nouppercase \leftmark}
 
-
 %%%% include all the main text chapters
 \include{06-chapter-1}
 \include{07-chapter-2}
+% \printbibliography[heading=subbibliography, title={References}]
 \include{08-chapter-3}
-\include{09-chapter-4}
-\include{10-chapter-5}
+% \printbibliography[heading=subbibliography, title={References}]
+% \include{09-chapter-4}
+% \include{10-chapter-5}
 
 
 
