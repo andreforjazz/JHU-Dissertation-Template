@@ -150,7 +150,7 @@
 \usepackage[utf8]{inputenc}                 % for encoding input character (required)
 \usepackage[american]{babel}                % for different language typography
 \usepackage[T1]{fontenc}                    % for font encoding
-
+\usepackage{textgreek} % for direct use of Greek letters like β in text
 
 %%%% DEFAULT FONT (you can specify other fonts - compatibility could be an issue)
 \usepackage{\FontPackage}
@@ -228,6 +228,7 @@
 
 \usepackage[backend=biber, defernumbers=true, style=nature, maxnames=99,
      date=year, isbn=false, url=false, doi=true, refsection=chapter]{biblatex}
+\usepackage{placeins}
 % \usepackage{booktabs}
 % \usepackage{tabularx}
 % \usepackage{array}
@@ -244,7 +245,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% specifying direct package options related to document formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%% GRAPHICX package
 \graphicspath{{\FigurePath/}}
 
@@ -272,9 +272,12 @@
 %%%% BIBLATEX: bibliography package settings
 % \addbibresource{\BibFileName}           % name of the bib file 
 % Load ALL bib files in preamble
+% \addbibresource{references/chapter1/refextracts.bib}
 \addbibresource{references/chapter2/refextracts.bib}
 \addbibresource{references/chapter3/refextracts.bib}
-
+\addbibresource{references/chapter4/refextracts.bib}
+% \addbibresource{references/chapter5/refextracts.bib}
+% \addbibresource{references/chapter6/refextracts.bib}
 % \DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
 \AtBeginBibliography{\urlstyle{rm}}     % roman font family for URL (DOI)
 \AtBeginBibliography{\vspace*{8pt}}     % add space for single-spaced bib text
@@ -623,11 +626,9 @@
 
 %%%% include all the main text chapters
 \include{06-chapter-1}
-\include{07-chapter-2}
-% \printbibliography[heading=subbibliography, title={References}]
-\include{08-chapter-3}
-% \printbibliography[heading=subbibliography, title={References}]
-% \include{09-chapter-4}
+% \include{07-chapter-2}
+% \include{08-chapter-3}
+\include{09-chapter-4}
 % \include{10-chapter-5}
 
 
@@ -651,12 +652,12 @@
 
 %%%% Appendix chapter (same header format as the main chapters)
 %% if you do not have appendix chapters, then comment them out
-\MainTextSpacing                    
-\fancyhead[L]{\appendixname\ \thechapter. \nouppercase \leftmark}
+% \MainTextSpacing                    
+% \fancyhead[L]{\appendixname\ \thechapter. \nouppercase \leftmark}
 
 
-\include{11-appendix-A}
-\include{12-appendix-B}
+% \include{11-appendix-A}
+% \include{12-appendix-B}
 
 %% add more appendix chapters if you have 
 
